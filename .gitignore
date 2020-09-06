@@ -9,9 +9,9 @@
 /coverage
 
 # production
-# /build
+/build
 
-# /src/components/firebase.js
+/src/components/firebase.js
 
 # misc
 .DS_Store
