@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link, Redirect } from 'react-router-dom'
 import Header from "./components/header"
 import MovieDiv from "./components/movie"
 import Container from "./components/movies-container"
@@ -252,7 +252,7 @@ class App extends React.Component {
             <FavouritesDiv inputChange={this.inputChange} input={this.state.input} signOut={this.signOut} user={this.state.userName} currentUser={this.state.currentUser} toggleFav={this.toggleFav}/>
           )}/>
           <Route exact={true} path="/SignInOrUp" render={()=>(
-            <SignInOrUp inputChange={this.inputChange} input={this.state.input} signOut={this.signOut} user={this.state.userName} currentUser={this.state.currentUser}/>
+            !this.state.currentUser ? (<SignInOrUp inputChange={this.inputChange} input={this.state.input} signOut={this.signOut} user={this.state.userName} currentUser={this.state.currentUser}/>) : (<Redirect to="/" />)
           )} />
           // {/* <Route exact={true} path="/signinandup" component={SignInOrUp} /> */}
 
