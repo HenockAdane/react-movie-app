@@ -30,7 +30,8 @@ class SignUp extends React.Component{
     }
 
     signUp(){
-        if (this.state.password === this.state.confirmPassword){
+        if (this.state.displayName !== "" && this.state.email !== "" && this.state.password !== "" && this.state.confirmPassword !== "")
+        if (this.state.password === this.state.confirmPassword && this.state.password.length >= 6){
             createUser(this.state.displayName, this.state.email, this.state.password)
 
             this.setState({
@@ -44,7 +45,11 @@ class SignUp extends React.Component{
         }
 
         else{
-            alert("The Passwords Do Not Match")
+            alert("Please Make Sure That The Passwords Contain 6 Or More Characters And Match")
+        }
+
+        else{
+            alert("Please fill in all the fields")
         }
 
     }

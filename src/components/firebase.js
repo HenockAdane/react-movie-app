@@ -62,8 +62,8 @@ const firebaseConfig = {
 
     export function getUser(email, password){
         return firebase.auth().signInWithEmailAndPassword(email, password).then(user =>{
-           console.log(process.env)
-        }).catch(err => console.log(err))
+           console.log("Welcome" + user)
+        }).catch(err => alert("The Email or Password is Incorrect"))
     }
 
 

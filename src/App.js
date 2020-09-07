@@ -100,11 +100,12 @@ class App extends React.Component {
 
         if(data.Response === "False"){
           this.setState({
-            movieFound: false
+            movies: []
           })
         }
 
         else{
+          console.log(data)
           this.setState({
             movies: data.Search.map((a) => {
               if(a.Poster !== "N/A"){
