@@ -75,7 +75,7 @@ class App extends React.Component {
       addUserToDB(user)
       this.setState({
         currentUser: user,
-      }, ()=> console.log(this.props.currentUser))
+      }, ()=> console.log(this.state.currentUser))
 
 
       firebase.firestore().collection("users").doc(user.uid).get().then(res =>{
@@ -83,14 +83,14 @@ class App extends React.Component {
           this.setState({
             userName: res.data().displayName,
             favourites: res.data().favourites
-          }, ()=> console.log(this.props.currentUser, this.state.favourites))
+          }, ()=> console.log(this.state.currentUser, this.state.favourites))
         }
         else{
           this.setState({
             userName: res.data().displayName,
             currentUser: user,
             favourites: []
-          }, ()=> console.log(this.props.currentUser, this.state.favourites))
+          }, ()=> console.log(this.state.currentUser, this.state.favourites))
         }
       })
 
@@ -194,9 +194,9 @@ class App extends React.Component {
   
   render(){
     const Movies = this.state.movies.map((a)=>{
-      if(!this.props.currentUser){
+      if(!this.state.currentUser){
       if (a !== undefined){
-        // if(this.props.currentUser === null){
+        // if(this.state.currentUser === null){
         return (<MovieDiv divClass="MovieDiv" moreInfo={this.moreInfo} starClass="fas fa-star" imgURL={a.Poster} title={a.Title} to1={"/moreInfo"} to2={"/SignInOrUp"} click={this.toggleFav}/>)
         // }
 
@@ -233,7 +233,7 @@ class App extends React.Component {
 
 
       // let header;
-      // if(this.props.currentUser !== null){
+      // if(this.state.currentUser !== null){
       //    header=<Header change={this.inputChange} value={this.state.input} h1="Welcome To Henock's Movie Library" link={(<div>
       //     <Link to="/">HOME<i class="fas fa-home"></i></Link>
       //     <Link to="/favourites">Favourites<i class="fas fa-star"></i></Link>
@@ -256,13 +256,13 @@ class App extends React.Component {
         {/* {header} */}
         <Switch>
           <Route exact={true} path="/" render={()=>(
-            <Container inputChange={this.inputChange} input={this.state.input} signOut={this.signOut} currentUser={this.props.currentUser}  movies={Movies} />
+            <Container inputChange={this.inputChange} input={this.state.input} signOut={this.signOut} currentUser={this.state.currentUser}  movies={Movies} />
           )}  />
           <Route exact={true} path="/favourites" render={() =>(
             <FavouritesDiv moreInfo={this.moreInfo} to1={"/moreInfo"} inputChange={this.inputChange} input={this.state.input} signOut={this.signOut} user={this.state.userName} currentUser={this.props.currentUser} toggleFav={this.toggleFav}/>
           )}/>
           <Route exact={true} path="/SignInOrUp" render={()=>(
-            !this.props.currentUser ? (<SignInOrUp inputChange={this.inputChange} input={this.state.input} signOut={this.signOut} user={this.state.userName} currentUser={this.props.currentUser}/>) : (<Redirect to="/" />)
+            !this.state.currentUser ? (<SignInOrUp inputChange={this.inputChange} input={this.state.input} signOut={this.signOut} user={this.state.userName} currentUser={this.state.currentUser}/>) : (<Redirect to="/" />)
           )} />
           // {/* <Route exact={true} path="/signinandup" component={SignInOrUp} /> */}
 
