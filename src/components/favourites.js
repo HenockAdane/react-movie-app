@@ -24,7 +24,7 @@ class FavouritesDiv extends React.Component{
                         fetch(`https://www.omdbapi.com/?t=${a}&apikey=thewdb`).then(res => res.json()).then(data =>{
                             if(data.Poster !== "N/A"){
                                 this.setState({
-                                    favourites: [...this.state.favourites, <MovieDiv divClass="MovieDiv yellow" starClass="fas fa-star yellow" imgURL={data.Poster} title={data.Title} to={"/favourites"} click={this.props.toggleFav}/>]
+                                    favourites: [...this.state.favourites, <MovieDiv moreInfo={this.props.moreInfo} to1 = {this.props.to1} divClass="MovieDiv yellow" starClass="fas fa-star yellow" imgURL={data.Poster} title={data.Title} to={"/favourites"} click={this.props.toggleFav}/>]
                                 })
                             }
                             
